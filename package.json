@@ -1,6 +1,6 @@
 {
   "name": "@readyplayerme/react-avatar-creator",
-  "version": "0.1.11",
+  "version": "0.1.0",
   "description": "Ready Player Me - React Avatar Creator",
   "keywords": [
     "readyplayerme",
@@ -55,7 +55,6 @@
     "rollup": "^3.26.0",
     "rollup-plugin-dts": "^5.3.0",
     "size-limit": "^8.2.4",
-    "storybook": "^7.0.8",
     "tslib": "^2.5.0",
     "typescript": "^5.0.4",
     "vite": "^4.3.1"
