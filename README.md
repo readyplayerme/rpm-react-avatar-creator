@@ -116,11 +116,11 @@ If you would like to use Visage, with its full capability to edit camera and lig
 
 ```tsx
 import { Avatar } from '@readyplayerme/visage';
-import { AvatarCreator } from '@readyplayerme/react-avatar-creator';
+import { AvatarCreator, AvatarCreatorConfig } from '@readyplayerme/react-avatar-creator';
 
 const subdomain = 'demo';
 
-const editorConfig: EditorConfig = {
+const editorConfig: AvatarCreatorConfig = {
   clearCache: true;
   bodyType: 'fullbody';
   quickStart: 'false';
@@ -131,7 +131,7 @@ export const YourCustomComponent = () => {
   const [url, setUrl] = useState<string | undefined>(undefined);
 
   return <>
-    <AvatarCreator subdomain={subdomain} editorConnfig={editorConfig} onAvatarExported={() => setUrl(event.data.url)} />
+    <AvatarCreator subdomain={subdomain} editorConfig={editorConfig} onAvatarExported={() => setUrl(event.data.url)} />
     <Avatar modelSrc={url} />
   </>
 }
