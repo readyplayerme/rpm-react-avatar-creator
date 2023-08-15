@@ -27,8 +27,7 @@ export type EventReceivedProps = {
  * @returns A React component.
  */
 export const AvatarCreatorRaw: FC<AvatarCreatorRawProps & EventReceivedProps> = ({ subdomain, className, config, onEventReceived }) => {
-  //@ts-ignore
-  const frameRef = useRef<HTMLIFrameElement>(null);
+  const frameRef = useRef<HTMLIFrameElement | null>(null);
   const url = useAvatarCreatorUrl(subdomain, config);
 
   const subscribeToAvatarCreatorEvents = () => {
