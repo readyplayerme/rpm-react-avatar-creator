@@ -3,7 +3,7 @@
  * @param jsonString The string to be parsed.
  * @returns The parsed JSON data or undefined if the data is not valid JSON.
  */
-export const JSONTryParse = <T>(jsonString: string): T | undefined => {
+export const JSONTryParse = <T>(jsonString: any): T | undefined => {
   try {
     return JSON.parse(jsonString);
   } catch (error) {

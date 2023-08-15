@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useRef } from 'react';
-import { AvatarCreatorConfig, IFrameEvent } from '../types';
+import { AvatarCreatorConfig } from '../types';
 import { JSONTryParse } from '../utils';
 import { AvatarCreatorEvent } from '../events';
 import { useAvatarCreatorUrl } from '../hooks/use-avatar-creator-url';
@@ -15,7 +15,7 @@ export type AvatarCreatorRawProps = {
 };
 
 export type EventReceivedProps = {
-  onEventReceived?: (event: IFrameEvent<AvatarCreatorEvent>) => void;
+  onEventReceived?: (event: AvatarCreatorEvent) => void;
 };
 
 /**
@@ -27,13 +27,14 @@ export type EventReceivedProps = {
  * @returns A React component.
  */
 export const AvatarCreatorRaw: FC<AvatarCreatorRawProps & EventReceivedProps> = ({ subdomain, className, config, onEventReceived }) => {
-  const iframeRef = useRef<HTMLIFrameElement | null>(null);
+  //@ts-ignore
+  const frameRef = useRef<HTMLIFrameElement>(null);
   const url = useAvatarCreatorUrl(subdomain, config);
 
   const subscribeToAvatarCreatorEvents = () => {
-    if (!iframeRef.current?.contentWindow) return;
+    if (!frameRef.current?.contentWindow) return;
 
-    iframeRef.current?.contentWindow?.postMessage(
+    frameRef.current?.contentWindow?.postMessage(
       JSON.stringify({
         target: RPM_TARGET,
         type: 'subscribe',
@@ -43,17 +44,17 @@ export const AvatarCreatorRaw: FC<AvatarCreatorRawProps & EventReceivedProps> = 
     );
   };
 
-  const subscribe = (event: any) => () => {
-    const iframeEvent = JSONTryParse<IFrameEvent<AvatarCreatorEvent>>(event);
+  const subscribe = (event: MessageEvent) => {
+    const avatarCreatorEvent = JSONTryParse<AvatarCreatorEvent>(event.data);
 
-    if (iframeEvent?.source !== RPM_TARGET) return;
+    if (avatarCreatorEvent?.source !== RPM_TARGET) return;
 
-    if (iframeEvent?.eventName === IFRAME_READY_EVENT) {
+    if (avatarCreatorEvent?.eventName == IFRAME_READY_EVENT) {
       subscribeToAvatarCreatorEvents();
       return;
     }
 
-    onEventReceived?.(iframeEvent);
+    onEventReceived?.(avatarCreatorEvent);
   };
 
   useEffect(() => {
@@ -64,5 +65,5 @@ export const AvatarCreatorRaw: FC<AvatarCreatorRawProps & EventReceivedProps> = 
     };
   }, []);
 
-  return <iframe title="Ready Player Me" ref={iframeRef} src={url} className={className} allow="camera *; clipboard-write" />;
+  return <iframe title="Ready Player Me" ref={frameRef} src={url} className={className} allow="camera *; clipboard-write" />;
 };

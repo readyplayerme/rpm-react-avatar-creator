@@ -10,7 +10,7 @@ export type AvatarCreatorConfig = {
 };
 
 export type IFrameEvent<TPayload> = {
-  eventName: string;
-  source: string;
+  eventName?: string;
+  source?: string;
   data: TPayload;
 };

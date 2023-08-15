@@ -60,9 +60,9 @@ import { AvatarCreator, AvatarCreatorConfig } from "@readyplayerme/react-avatar-
 
 const config: AvatarCreatorConfig = {
     clearCache: true;
-    bodyType: 'halfbody';
+    bodyType: 'fullbody';
     quickStart: 'false';
-    language: 'tr';
+    language: 'en';
 }
 
 const handleOnUserSet = (event: UserSetEvent) => {
@@ -104,9 +104,9 @@ import { AvatarCreator, AvatarCreatorConfig } from "@readyplayerme/react-avatar-
 
 const config: AvatarCreatorConfig = {
   clearCache: true;
-  bodyType: 'halfbody';
+  bodyType: 'fullbody';
   quickStart: 'false';
-  language: 'tr';
+  language: 'en';
 }
 
 <AvatarCreatorRaw subdomain="demo" config={config}
@@ -127,7 +127,7 @@ const config: AvatarCreatorConfig = {
   clearCache: true;
   bodyType: 'fullbody';
   quickStart: 'false';
-  language: 'tr';
+  language: 'en';
 };
 
 export const YourCustomComponent = () => {

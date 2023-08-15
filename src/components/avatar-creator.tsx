@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { IFrameEvent } from '../types';
 import { AvatarCreatorEvent, UserAuthorizedEvent, AssetUnlockedEvent, AvatarExportedEvent, UserSetEvent } from '../events';
 import { AvatarCreatorRaw, AvatarCreatorRawProps } from './avatar-creator-raw';
 
@@ -29,8 +28,8 @@ export const AvatarCreator: FC<AvatarCreatorProps> = ({ subdomain, className, co
     'v1.asset.unlock': onAssetUnlock,
   } as Record<string, any>;
 
-  const handleEvents = (event: IFrameEvent<AvatarCreatorEvent>) => {
-    supportedEvents[event.eventName]?.();
+  const handleEvents = (event: AvatarCreatorEvent) => {
+    supportedEvents[event.eventName!]?.(event);
   };
 
   return <AvatarCreatorRaw subdomain={subdomain} className={className} config={config} onEventReceived={handleEvents} />;
