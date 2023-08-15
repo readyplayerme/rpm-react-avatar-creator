@@ -23,7 +23,6 @@ export type EventReceivedProps = {
  * @param subdomain The subdomain of your Ready Player Me instance.
  * @param className The css styles to apply to this iframe.
  * @param avatarCreatorConfig The configuration for the AvatarCreator component.
- * @param avatarConfig The configuration for the Avatar GLB file.
  * @param onEventReceived A callback that is called when an avatar creator event is received.
  * @returns A React component.
  */
