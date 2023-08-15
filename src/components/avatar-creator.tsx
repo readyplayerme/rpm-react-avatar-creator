@@ -14,14 +14,14 @@ export type AvatarCreatorProps = {
  * AvatarCreator is a React component that allows you to create an avatar using Ready Player Me and receive avatar URL. It wraps AvatarCreatorRaw to provide more type safety, and to provide explicit callbacks per event type.
  * @param subdomain The subdomain of your Ready Player Me instance.
  * @param className The css styles to apply to this iframe.
- * @param avatarCreatorConfig The configuration for the AvatarCreator component.
+ * @param config The configuration for the AvatarCreator component.
  * @param onUserSet A callback that is called when a user is set.
  * @param onAvatarExported A callback that is called when an avatar is exported.
  * @param onUserAuthorized A callback that is called when a user is authorized.
  * @param onAssetUnlock A callback that is called when an asset unlock button is pressed in RPM.
  * @returns A React component.
  */
-export const AvatarCreator: FC<AvatarCreatorProps> = ({ subdomain, className, avatarCreatorConfig, onUserSet, onAvatarExported, onUserAuthorized, onAssetUnlock }) => {
+export const AvatarCreator: FC<AvatarCreatorProps> = ({ subdomain, className, config, onUserSet, onAvatarExported, onUserAuthorized, onAssetUnlock }) => {
   const supportedEvents = {
     'v1.avatar.exported': onAvatarExported,
     'v1.user.set': onUserSet,
@@ -33,5 +33,5 @@ export const AvatarCreator: FC<AvatarCreatorProps> = ({ subdomain, className, av
     supportedEvents[event.eventName]?.();
   };
 
-  return <AvatarCreatorRaw subdomain={subdomain} className={className} avatarCreatorConfig={avatarCreatorConfig} onEventReceived={handleEvents} />;
+  return <AvatarCreatorRaw subdomain={subdomain} className={className} config={config} onEventReceived={handleEvents} />;
 };

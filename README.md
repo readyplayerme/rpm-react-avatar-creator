@@ -34,7 +34,10 @@ AvatarCreator component helps you load Ready Player Me in an iframe where you ca
 **subdomain** *[required]*: string 
 - Your Ready Player Me subdomain. You can get one from [Ready Player Me Studio](https://studio.readyplayer.me/).
 
-**editorConfig** *[optional]*: EditorConfig
+**className** *[optional]*: string
+- The css styles to apply to the iframe.
+
+**config** *[optional]*: AvatarCreatorConfig
 - Editor Configuration is where you can set url properties of Ready Player Me editor. Read more about these options in [Ready Player Me documentations](https://docs.readyplayer.me/ready-player-me/integration-guides/web-and-native-integration/avatar-creator-integration#configuration-1).
 
 **onAvatarExported** *[optional]*: (event: AvatarExportedEvent) => void
@@ -71,7 +74,7 @@ const handleOnAvatarExported = (event: AvatarExportedEvent) => {
 }
 
 <AvatarCreator subdomain="demo" 
-               editorConfig={config}
+               config={config}
                onUserSet={handleOnUserSet} 
                onAvatarExported={handleOnAvatarExported}/>
 ```
@@ -85,11 +88,11 @@ AvatarCreatorRaw is a lower level component that gives you everything found in t
 **subdomain** *[required]*: string
 - Your Ready Player Me subdomain. You can get one from [Ready Player Me Studio](https://studio.readyplayer.me/).
 
-**editorConfig** *[optional]*: EditorConfig
-- Editor Configuration is where you can set url properties of Ready Player Me editor. Read more about these options in [Ready Player Me documentations](https://docs.readyplayer.me/ready-player-me/integration-guides/web-and-native-integration/avatar-creator-integration#configuration-1).
+**className** *[optional]*: string
+- The css styles to apply to the iframe.
 
-**avatarConfig** *[optional]*: AvatarConfig
-- Avatar Configuration is that changes the optimization properties of the generated GLB avatar model. Read more about these options in [Ready Player Me documentations](https://docs.readyplayer.me/ready-player-me/api-reference/avatar-rest-api/get-3d-avatars).
+**config** *[optional]*: AvatarCreatorConfig
+- Editor Configuration is where you can set url properties of Ready Player Me editor. Read more about these options in [Ready Player Me documentations](https://docs.readyplayer.me/ready-player-me/integration-guides/web-and-native-integration/avatar-creator-integration#configuration-1).
 
 **onEventReceived** *[required]*: (event: IFrameEvent<any>) => void
 - Callback function that is called whenever an AvatarCreatorEvent is published
@@ -106,7 +109,7 @@ const config: AvatarCreatorConfig = {
   language: 'tr';
 }
 
-<AvatarCreatorRaw subdomain="demo" editorConfig={config}
+<AvatarCreatorRaw subdomain="demo" config={config}
   onEventReceived={(event) => console.log(event.eventName)}/>
 ```
 
@@ -120,7 +123,7 @@ import { AvatarCreator, AvatarCreatorConfig } from '@readyplayerme/react-avatar-
 
 const subdomain = 'demo';
 
-const editorConfig: AvatarCreatorConfig = {
+const config: AvatarCreatorConfig = {
   clearCache: true;
   bodyType: 'fullbody';
   quickStart: 'false';
@@ -131,7 +134,7 @@ export const YourCustomComponent = () => {
   const [url, setUrl] = useState<string | undefined>(undefined);
 
   return <>
-    <AvatarCreator subdomain={subdomain} editorConfig={editorConfig} onAvatarExported={() => setUrl(event.data.url)} />
+    <AvatarCreator subdomain={subdomain} config={config} onAvatarExported={() => setUrl(event.data.url)} />
     <Avatar modelSrc={url} />
   </>
 }

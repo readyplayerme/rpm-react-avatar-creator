@@ -11,7 +11,7 @@ const IFRAME_READY_EVENT = 'v1.frame.ready';
 export type AvatarCreatorRawProps = {
   subdomain: string;
   className?: string;
-  avatarCreatorConfig?: AvatarCreatorConfig;
+  config?: AvatarCreatorConfig;
 };
 
 export type EventReceivedProps = {
@@ -26,9 +26,9 @@ export type EventReceivedProps = {
  * @param onEventReceived A callback that is called when an avatar creator event is received.
  * @returns A React component.
  */
-export const AvatarCreatorRaw: FC<AvatarCreatorRawProps & EventReceivedProps> = ({ subdomain, className, avatarCreatorConfig, onEventReceived }) => {
+export const AvatarCreatorRaw: FC<AvatarCreatorRawProps & EventReceivedProps> = ({ subdomain, className, config, onEventReceived }) => {
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
-  const url = useAvatarCreatorUrl(subdomain, avatarCreatorConfig);
+  const url = useAvatarCreatorUrl(subdomain, config);
 
   const subscribeToAvatarCreatorEvents = () => {
     if (!iframeRef.current?.contentWindow) return;
