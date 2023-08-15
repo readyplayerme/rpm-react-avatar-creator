@@ -15,7 +15,8 @@ npm i @readyplayerme/react-avatar-creator
 import { AvatarCreator } from '@readyplayerme/react-avatar-creator';
 
 export default function App() {
-  return (<AvatarCreator subdomain="demo"/>);
+  return (<AvatarCreator subdomain="demo"
+                         style={{width: '100%', height: '100%', border: 'none'}}/>);
 }
 ```
 
@@ -35,6 +36,9 @@ AvatarCreator component helps you load Ready Player Me in an iframe where you ca
 - Your Ready Player Me subdomain. You can get one from [Ready Player Me Studio](https://studio.readyplayer.me/).
 
 **className** *[optional]*: string
+- The css classes to apply to the iframe.
+
+**style** *[optional]*: CSSProperties
 - The css styles to apply to the iframe.
 
 **config** *[optional]*: AvatarCreatorConfig
@@ -75,6 +79,7 @@ const handleOnAvatarExported = (event: AvatarExportedEvent) => {
 
 <AvatarCreator subdomain="demo" 
                config={config}
+               style={{width: '100%', height: '100%', border: 'none'}}
                onUserSet={handleOnUserSet} 
                onAvatarExported={handleOnAvatarExported}/>
 ```
@@ -89,6 +94,9 @@ AvatarCreatorRaw is a lower level component that gives you everything found in t
 - Your Ready Player Me subdomain. You can get one from [Ready Player Me Studio](https://studio.readyplayer.me/).
 
 **className** *[optional]*: string
+- The css classes to apply to the iframe.
+
+**style** *[optional]*: CSSProperties
 - The css styles to apply to the iframe.
 
 **config** *[optional]*: AvatarCreatorConfig
@@ -109,8 +117,10 @@ const config: AvatarCreatorConfig = {
   language: 'en';
 }
 
-<AvatarCreatorRaw subdomain="demo" config={config}
-  onEventReceived={(event) => console.log(event.eventName)}/>
+<AvatarCreatorRaw subdomain="demo" 
+                  config={config}
+                  style={{width: '100%', height: '100%', border: 'none'}} 
+                  onEventReceived={(event) => console.log(event.eventName)}/>
 ```
 
 ## Using AvatarCreator with Visage
@@ -134,7 +144,10 @@ export const YourCustomComponent = () => {
   const [url, setUrl] = useState<string | undefined>(undefined);
 
   return <>
-    <AvatarCreator subdomain={subdomain} config={config} onAvatarExported={() => setUrl(event.data.url)} />
+    <AvatarCreator subdomain={subdomain}
+                   config={config}
+                   style={{width: '100%', height: '100%', border: 'none'}}
+                   onAvatarExported={() => setUrl(event.data.url)} />
     <Avatar modelSrc={url} />
   </>
 }
