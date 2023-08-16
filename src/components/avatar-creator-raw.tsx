@@ -50,7 +50,7 @@ export const AvatarCreatorRaw: FC<AvatarCreatorRawProps & EventReceivedProps> = 
 
     if (avatarCreatorEvent?.source !== RPM_TARGET) return;
 
-    if (avatarCreatorEvent?.eventName == IFRAME_READY_EVENT) {
+    if (avatarCreatorEvent?.eventName === IFRAME_READY_EVENT) {
       subscribeToAvatarCreatorEvents();
       return;
     }
