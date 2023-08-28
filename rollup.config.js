@@ -23,6 +23,7 @@ module.exports = [
         tsconfig: './tsconfig.json',
       }),
     ],
+    external: ['react'],
   },
   {
     input: 'src/index.tsx',
