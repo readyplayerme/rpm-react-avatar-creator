@@ -3,6 +3,7 @@
 **Ready Player Me - React Avatar Creator** is a set of components and helper methods to help implementing the Ready Player Me Avatar Creator into React projects.
 
 ## Installation
+
 Ready Player Me React Avatar Creator is available as a [npm package](https://www.npmjs.com/package/@readyplayerme/react-avatar-creator).
 
 ```bash
@@ -15,8 +16,7 @@ npm i @readyplayerme/react-avatar-creator
 import { AvatarCreator } from '@readyplayerme/react-avatar-creator';
 
 export default function App() {
-  return (<AvatarCreator subdomain="demo"
-                         style={{width: '100%', height: '100%', border: 'none'}}/>);
+  return <AvatarCreator subdomain="demo" style={{ width: '100%', height: '100vh', border: 'none' }} />;
 }
 ```
 
@@ -32,56 +32,67 @@ AvatarCreator component helps you load Ready Player Me in an iframe where you ca
 
 ### Parameters
 
-**subdomain** *[required]*: string 
+**subdomain** _[required]_: string
+
 - Your Ready Player Me subdomain. You can get one from [Ready Player Me Studio](https://studio.readyplayer.me/).
 
-**className** *[optional]*: string
+**className** _[optional]_: string
+
 - The css classes to apply to the iframe.
 
-**style** *[optional]*: CSSProperties
+**style** _[optional]_: CSSProperties
+
 - The css styles to apply to the iframe.
 
-**config** *[optional]*: AvatarCreatorConfig
+**config** _[optional]_: AvatarCreatorConfig
+
 - Editor Configuration is where you can set url properties of Ready Player Me editor. Read more about these options in [Ready Player Me documentations](https://docs.readyplayer.me/ready-player-me/integration-guides/web-and-native-integration/avatar-creator-integration#configuration-1).
 
-**onAvatarExported** *[optional]*: (event: AvatarExportedEvent) => void
+**onAvatarExported** _[optional]_: (event: AvatarExportedEvent) => void
+
 - Callback function that is called when avatar is exported.
 
-**onUserSet** *[optional]*: (event: UserSetEvent) => void
+**onUserSet** _[optional]_: (event: UserSetEvent) => void
+
 - Callback function that is called when user id is set.
 
-**onAssetUnlocked** *[optional]*: (event: AssetUnlockedEvent) => void
+**onAssetUnlocked** _[optional]_: (event: AssetUnlockedEvent) => void
+
 - Callback function that is called when an asset is unlocked.
 
-**onUserAuthorized** *[optional]*: (event: UserAuthorizedEvent) => void
+**onUserAuthorized** _[optional]_: (event: UserAuthorizedEvent) => void
+
 - Callback function that is called when the user is authorized.
 
 ### Example
 
 ```tsx
-import { AvatarExportedEvent, UserSetEvent } from "@readyplayerme/react-avatar-creator/events";
-import { AvatarCreator, AvatarCreatorConfig } from "@readyplayerme/react-avatar-creator";
+import { AvatarCreator, AvatarCreatorConfig, AvatarExportedEvent, UserSetEvent } from '@readyplayerme/react-avatar-creator';
 
 const config: AvatarCreatorConfig = {
-    clearCache: true;
-    bodyType: 'fullbody';
-    quickStart: 'false';
-    language: 'en';
-}
+  clearCache: true,
+  bodyType: 'fullbody',
+  quickStart: false,
+  language: 'en',
+};
 
-const handleOnUserSet = (event: UserSetEvent) => {
-    console.log(`User ID is: ${event.data.id}`)
-}
+const style = { width: '100%', height: '100vh', border: 'none' };
 
-const handleOnAvatarExported = (event: AvatarExportedEvent) => {
-    console.log(`Avatar URL is: ${event.data.url}`)
-}
+export default function App() {
+  const handleOnUserSet = (event: UserSetEvent) => {
+    console.log(`User ID is: ${event.data.id}`);
+  };
 
-<AvatarCreator subdomain="demo" 
-               config={config}
-               style={{width: '100%', height: '100%', border: 'none'}}
-               onUserSet={handleOnUserSet} 
-               onAvatarExported={handleOnAvatarExported}/>
+  const handleOnAvatarExported = (event: AvatarExportedEvent) => {
+    console.log(`Avatar URL is: ${event.data.url}`);
+  };
+
+  return (
+    <>
+      <AvatarCreator subdomain="demo" config={config} style={style} onUserSet={handleOnUserSet} onAvatarExported={handleOnAvatarExported} />
+    </>
+  );
+}
 ```
 
 ## AvatarCreatorRaw
@@ -90,37 +101,51 @@ AvatarCreatorRaw is a lower level component that gives you everything found in t
 
 ### Parameters
 
-**subdomain** *[required]*: string
+**subdomain** _[required]_: string
+
 - Your Ready Player Me subdomain. You can get one from [Ready Player Me Studio](https://studio.readyplayer.me/).
 
-**className** *[optional]*: string
+**className** _[optional]_: string
+
 - The css classes to apply to the iframe.
 
-**style** *[optional]*: CSSProperties
+**style** _[optional]_: CSSProperties
+
 - The css styles to apply to the iframe.
 
-**config** *[optional]*: AvatarCreatorConfig
+**config** _[optional]_: AvatarCreatorConfig
+
 - Editor Configuration is where you can set url properties of Ready Player Me editor. Read more about these options in [Ready Player Me documentations](https://docs.readyplayer.me/ready-player-me/integration-guides/web-and-native-integration/avatar-creator-integration#configuration-1).
 
-**onEventReceived** *[required]*: (event: IFrameEvent<any>) => void
+**onEventReceived** _[required]_: (event: IFrameEvent<any>) => void
+
 - Callback function that is called whenever an AvatarCreatorEvent is published
 
 ### Example
 
 ```tsx
-import { AvatarCreator, AvatarCreatorConfig } from "@readyplayerme/react-avatar-creator";
+import { AvatarCreatorConfig, AvatarCreatorEvent, AvatarCreatorRaw } from '@readyplayerme/react-avatar-creator';
 
 const config: AvatarCreatorConfig = {
-  clearCache: true;
-  bodyType: 'fullbody';
-  quickStart: 'false';
-  language: 'en';
-}
+  clearCache: true,
+  bodyType: 'fullbody',
+  quickStart: false,
+  language: 'en',
+};
 
-<AvatarCreatorRaw subdomain="demo" 
-                  config={config}
-                  style={{width: '100%', height: '100%', border: 'none'}} 
-                  onEventReceived={(event) => console.log(event.eventName)}/>
+const style = { width: '100%', height: '100vh', border: 'none' };
+
+export default function App() {
+  const handleCustomEvent = (event: AvatarCreatorEvent) => {
+    console.log(`Received custom event`, event);
+  };
+
+  return (
+    <>
+      <AvatarCreatorRaw subdomain="demo" config={config} style={style} onEventReceived={handleCustomEvent} />
+    </>
+  );
+}
 ```
 
 ## Using AvatarCreator with Visage
@@ -130,25 +155,25 @@ If you would like to use Visage, with its full capability to edit camera and lig
 ```tsx
 import { Avatar } from '@readyplayerme/visage';
 import { AvatarCreator, AvatarCreatorConfig } from '@readyplayerme/react-avatar-creator';
+import { useState } from 'react';
 
 const subdomain = 'demo';
 
 const config: AvatarCreatorConfig = {
-  clearCache: true;
-  bodyType: 'fullbody';
-  quickStart: 'false';
-  language: 'en';
+  clearCache: true,
+  bodyType: 'fullbody',
+  quickStart: false,
+  language: 'en',
 };
 
-export const YourCustomComponent = () => {
-  const [url, setUrl] = useState<string | undefined>(undefined);
+const style = { width: '100%', height: '100vh', border: 'none' };
 
-  return <>
-    <AvatarCreator subdomain={subdomain}
-                   config={config}
-                   style={{width: '100%', height: '100%', border: 'none'}}
-                   onAvatarExported={() => setUrl(event.data.url)} />
-    <Avatar modelSrc={url} />
-  </>
-}
+export const YourCustomComponent = () => {
+  const [url, setUrl] = useState<string>();
+
+  if (!url) {
+    return <AvatarCreator subdomain={subdomain} config={config} style={style} onAvatarExported={(event) => setUrl(event.data.url)} />;
+  }
+  return <Avatar style={style} modelSrc={url} cameraInitialDistance={10} />;
+};
 ```
