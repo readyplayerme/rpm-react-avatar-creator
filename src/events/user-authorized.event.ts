@@ -1,7 +1,7 @@
 import { IFrameEvent } from '../types';
 
 export type UserAuthorizedEventPayload = {
-  url: string;
+  id: string;
 };
 
 export type UserAuthorizedEvent = IFrameEvent<UserAuthorizedEventPayload>;
