@@ -2,7 +2,9 @@
 
 **Ready Player Me - React Avatar Creator** is a set of components and helper methods to help implementing the Ready Player Me Avatar Creator into React projects.
 
-Codesandbox example is available here: https://codesandbox.io/p/sandbox/ready-player-me-react-avatar-creator-qxkqjf
+Codesandbox example for loading the Avatar Creator: https://codesandbox.io/p/sandbox/ready-player-me-react-avatar-creator-qxkqjf
+
+Codesandbox example for loading the Avatar Creator and visualizing the avatar with the Visage package: https://codesandbox.io/p/sandbox/ready-player-me-visage-example-l4m2k2
 
 ## Installation
 
