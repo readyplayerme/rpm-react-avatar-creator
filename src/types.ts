@@ -7,6 +7,7 @@ export type AvatarCreatorConfig = {
   bodyType?: BodyType;
   quickStart?: boolean;
   language?: Language;
+  token?: string
 };
 
 export type IFrameEvent<TPayload> = {

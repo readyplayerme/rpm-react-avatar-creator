@@ -10,6 +10,7 @@ export const useAvatarCreatorUrl = (subdomain: string, config: AvatarCreatorConf
     if (config?.clearCache) url += '&clearCache';
     if (config?.quickStart) url += '&quickStart';
     if (config?.bodyType) url += `&bodyType=${config?.bodyType}`;
+    if (config?.token) url += `&token=${config?.token}`;
 
     return url;
   }, [subdomain, config]);
