@@ -6,7 +6,7 @@ export const useAvatarCreatorUrl = (subdomain: string, config: AvatarCreatorConf
     let url = `https://${subdomain || `demo`}.readyplayer.me`;
 
     if (config?.language) url += `/${config.language}`;
-    url += `/avatar?frameApi`;
+    url += `/avatar?frameApi&source=react-avatar-creator`;
     if (config?.clearCache) url += '&clearCache';
     if (config?.quickStart) url += '&quickStart';
     if (config?.bodyType) url += `&bodyType=${config?.bodyType}`;
