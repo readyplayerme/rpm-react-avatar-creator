@@ -11,6 +11,7 @@ export const useAvatarCreatorUrl = (subdomain: string, config: AvatarCreatorConf
     if (config?.quickStart) url += '&quickStart';
     if (config?.bodyType) url += `&bodyType=${config?.bodyType}`;
     if (config?.token) url += `&token=${config?.token}`;
+    if (config?.avatarId) url += `&id=${config?.avatarId}`;
 
     return url;
   }, [subdomain, config]);
