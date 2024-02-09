@@ -1,12 +1,16 @@
 import React, { FC } from 'react';
 import { AvatarCreatorEvent, UserAuthorizedEvent, AssetUnlockedEvent, AvatarExportedEvent, UserSetEvent } from '../events';
 import { AvatarCreatorRaw, AvatarCreatorRawProps } from './avatar-creator-raw';
+import { UserUpdatedEvent } from '../events/user-updated.event';
+import { UserLoggedOutEvent } from '../events/user-logged-out.event';
 
 export type AvatarCreatorProps = {
   onUserSet?: (event: UserSetEvent) => void;
   onAvatarExported?: (event: AvatarExportedEvent) => void;
   onUserAuthorized?: (event: UserAuthorizedEvent) => void;
   onAssetUnlock?: (event: AssetUnlockedEvent) => void;
+  onUserUpdated?: (event: UserUpdatedEvent) => void;
+  onUserLoggedOut?: (event: UserLoggedOutEvent) => void;
 } & AvatarCreatorRawProps;
 
 /**
@@ -15,18 +19,22 @@ export type AvatarCreatorProps = {
  * @param className The css classes to apply to this iframe.
  * @param style The css styles to apply to this iframe.
  * @param config The configuration for the AvatarCreator component.
- * @param onUserSet A callback that is called when a user is set.
+ * @param onUserSet A callback that is called when the user is set.
  * @param onAvatarExported A callback that is called when an avatar is exported.
- * @param onUserAuthorized A callback that is called when a user is authorized.
+ * @param onUserAuthorized A callback that is called when the user is authorized.
  * @param onAssetUnlock A callback that is called when an asset unlock button is pressed in RPM.
+ * @param onUserUpdated A callback that is called when the user is updated.
+ * @param onUserLoggedOut A callback that is called when the user is logged out.
  * @returns A React component.
  */
-export const AvatarCreator: FC<AvatarCreatorProps> = ({ subdomain, className, style, config, onUserSet, onAvatarExported, onUserAuthorized, onAssetUnlock }) => {
+export const AvatarCreator: FC<AvatarCreatorProps> = ({ subdomain, className, style, config, onUserSet, onAvatarExported, onUserAuthorized, onAssetUnlock, onUserUpdated, onUserLoggedOut }) => {
   const supportedEvents = {
     'v1.avatar.exported': onAvatarExported,
     'v1.user.set': onUserSet,
     'v1.user.authorized': onUserAuthorized,
     'v1.asset.unlock': onAssetUnlock,
+    'v1.user.updated': onUserUpdated,
+    'v1.user.logout': onUserLoggedOut,
   } as Record<string, any>;
 
   const handleEvents = (event: AvatarCreatorEvent) => {

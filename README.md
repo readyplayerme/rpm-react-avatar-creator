@@ -68,6 +68,14 @@ AvatarCreator component helps you load Ready Player Me in an iframe where you ca
 
 - Callback function that is called when the user is authorized.
 
+**onUserUpdated** _[optional]_: (event: UserUpdatedEvent) => void
+
+- Callback function that is called when the user is updated.
+
+**onUserLoggedOut** _[optional]_: (event: UserLoggedOutEvent) => void
+
+- Callback function that is called when the user is logged out.
+
 ### Example
 
 ```tsx
